@@ -31,7 +31,10 @@ list.addEventListener("click", (e) => {
   }
 });
 
-// fetch items from API endpoint https://jsonplaceholder.typicode.com/todos
+/**
+ * fetch items from API endpoint
+ * @url https://jsonplaceholder.typicode.com/todos
+ */
 const fetchItems = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
   const items = await res.json();
