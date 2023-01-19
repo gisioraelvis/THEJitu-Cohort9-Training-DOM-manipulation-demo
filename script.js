@@ -4,35 +4,29 @@ const input = document.getElementById("input");
 const btn = document.getElementById("submit");
 const list = document.getElementById("list");
 
-// Add an event listener to the form
+// Items array
+let itemsArray = [];
+
+// Gets the input value and add it to the items array
 form.addEventListener("submit", (e) => {
-  // Prevent the form from submitting
   e.preventDefault();
-  // Add the input value to the list
-  addItem();
+  itemsArray.unshift(input.value);
+  displayItems();
+  input.value = "";
 });
 
-// Function to add item to the list
-function addItem() {
-  // Create a new list item
-  const item = document.createElement("li");
-  // Add the input value to the list item
-  item.innerText = input.value;
-  // Add the list item to the list
-  list.appendChild(item);
+// Read the items and display them on the page
+function displayItems() {
+  list.innerHTML = "";
+  itemsArray.forEach((item) => {
+    list.innerHTML += `<li>${item}</li>`;
+  });
 }
 
-// Add an event listener to the list
+// Remove an item from the items array and update the display list
 list.addEventListener("click", (e) => {
-  // Remove the list item from the list
-  removeItem(e.target);
-});
-
-// Function to remove item from the list
-function removeItem(item) {
-  // Check if the clicked item is a list item
-  if (item.tagName === "LI") {
-    // Remove the list item from the list
-    list.removeChild(item);
+  if (e.target.tagName === "LI") {
+    itemsArray = itemsArray.filter((item) => item !== e.target.innerText);
+    displayItems();
   }
-}
+});
